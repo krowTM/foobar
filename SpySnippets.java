@@ -31,4 +31,41 @@ public class Answer {
 			}
 		}
     	
+    	int score = Integer.MAX_VALUE;
+    	int min = 0, max = 0, first = 0, last = 0;
+    	for (String word : searchTerms) {
+    		if (!wordsHash.containsKey(word)) continue;
+    		for (int position : wordsHash.get(word)) {
+    			first = position;
+            	last = position;
+            	List<Integer> resWords = new ArrayList<Integer>();
+            	resWords.add(position);
+    			for (String word2 : searchTerms) {
+    				if (word.equals(word2)) continue;
+    				int distance = Integer.MAX_VALUE;
+    				int newPos = 0;
+    				for (int other_position : wordsHash.get(word2)) {
+    					if (Math.abs(position - other_position) < distance) {
+    						distance = Math.abs(position - other_position);
+    						newPos = other_position;
+    					}
+    				}
+    				resWords.add(newPos);
+    			}
+    			first = Collections.min(resWords);
+				last = Collections.max(resWords);
+    			if (last - first < score) {
+        			score = last - first;
+        			min = first;
+        			max = last;
+        		}
+    		}
+    	}
+    	
+    	for (String s : words.subList(min, max + 1)) {
+    		ret += s + " ";
+    	}
+    	
+    	return ret.trim();
+    }
 }
