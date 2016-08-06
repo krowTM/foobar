@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Answer {   
-    public static String answer(String document, String[] searchTerms) {
+public class Answer {
+   public static String answer(String document, String[] searchTerms) {
     	String ret = "";
     	Map<String, List<Integer>> wordsHash = new HashMap<String, List<Integer>>();
     	List<String> words = Arrays.asList(document.split("\\s+"));
